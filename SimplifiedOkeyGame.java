@@ -145,8 +145,25 @@ public class SimplifiedOkeyGame {
      * this should set lastDiscardedTile variable and remove that tile from
      * that player's tiles
      */
-    public void discardTile(int tileIndex) {
+    public void discardTile(int tileIndex) 
+    {
+        lastDiscardedTile = tiles[tileIndex];
 
+        // new array will be formed after discarding a tile
+        Tile [] discardedTile = new Tile[players[currentPlayerIndex].getTiles().length-1];
+
+        for(int i = 0; i<tileIndex; i++)
+        {
+            discardedTile[i] = players[currentPlayerIndex].getTiles()[i];
+        }
+
+        for(int j = tileIndex; j<discardedTile.length; j++)
+        {
+            discardedTile[j] = players[currentPlayerIndex].getTiles()[j+1];
+        }
+
+        players[currentPlayerIndex].playerTiles = discardedTile; // the player tile is set to discarded tile
+        players[currentPlayerIndex].numberOfTiles--; // number of tiles is decremented
     }
 
     public void displayDiscardInformation() {
