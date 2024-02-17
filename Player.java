@@ -17,7 +17,7 @@ public class Player {
      * check the assigment text for more details on winning condition
      */
     public boolean checkWinning() {
-        return false;
+        return this.findLongestChain() == 14;
     }
 
     /*
@@ -28,16 +28,54 @@ public class Player {
      */
     public int findLongestChain() {
         int longestChain = 0;
+        int currChain = 0;
+        int size = getTiles().length;
+        //getTiles() && canFormChainWith (Tile t)method
+        for(int index = 0; index < size - 1; index++)
+        {
+            if (getTiles()[index].canFormChainWith(getTiles()[index + 1]) ) 
+            {
+                currChain++;
+                compareChains(currChain, longestChain);
+            }
+            else
+            {
+                compareChains(currChain, longestChain);
+                currChain = 0;
+            }
+        }
 
         return longestChain;
     }
 
-    /*
-     * TODO: removes and returns the tile in given index position
+    //Added an extra method for reusage
+    public void compareChains(int currChain, int longestChain)
+    {
+        if (currChain > longestChain) 
+        {
+            longestChain = currChain;    
+        }
+    }
+
+    /**
+     * 
+     * @param index
+     * @return
      */
     public Tile getAndRemoveTile(int index) {
-        return null;
+        Tile selectedTile = this.getTiles()[index];
+        for(int i = index; i < this.getTiles().length - 1; i++)
+        {
+            this.getTiles()[index] = this.getTiles()[index + 1];
+        }
+        
+        //I'm not sure about where we actually use this method since neither main or any other classes partial imp.
+        //seem to be using it
+
+        return selectedTile;
     }
+
+
 
     /*
      * TODO: adds the given tile to this player's hand keeping the ascending order
