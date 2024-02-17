@@ -90,7 +90,29 @@ public class SimplifiedOkeyGame {
      * if multiple players have the same length may return multiple players
      */
     public Player[] getPlayerWithHighestLongestChain() {
+        Player playerWithHighestChain = new Player(getCurrentPlayerName());
+        playerWithHighestChain = players[0];
+        for (int i = 1; i < players.length; i++) {
+            if(players[i].findLongestChain() > playerWithHighestChain.findLongestChain()){
+                playerWithHighestChain = players[i];
+            }
+        }
+        int winnersCount = 0;
 
+        for (int i = 0; i < players.length; i++) {
+            if(playerWithHighestChain.findLongestChain() == players[i].findLongestChain()){
+                winnersCount++;
+            }
+        }
+        Player[] winners = new Player[winnersCount];
+        int index = 0;
+        for (int i = 0; i < players.length; i++) {
+            if(playerWithHighestChain.findLongestChain() == players[i].findLongestChain()){
+                winners[index++] = players[i];
+            }
+        }
+
+        return winners;
     }
     
     /*
