@@ -82,7 +82,7 @@ public class SimplifiedOkeyGame {
      * finished the game. use checkWinning method of the player class to determine
      */
     public boolean didGameFinish() {
-        return false;
+        return players[getCurrentPlayerIndex()].checkWinning();
     }
 
     /* TODO: finds the player who has the highest number for the longest chain
@@ -129,7 +129,14 @@ public class SimplifiedOkeyGame {
      * by checking if it increases the longest chain length, if not get the top tile
      */
     public void pickTileForComputer() {
-
+        if (lastDiscardedTile != null) {
+            if (players[currentPlayerIndex].findPositionOfTile(lastDiscardedTile) != -1) {
+                getLastDiscardedTile();
+            }
+        }
+        else {
+            getTopTile();
+        }
     }
 
     /*
