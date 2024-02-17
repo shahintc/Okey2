@@ -61,7 +61,8 @@ public class SimplifiedOkeyGame {
      * returns the toString method of the tile so that we can print what we picked
      */
     public String getTopTile() {
-        return null;
+        players[currentPlayerIndex].addTile(tiles[0]);
+        return tiles[0].toString();
     }
 
     /*
@@ -88,9 +89,7 @@ public class SimplifiedOkeyGame {
      * if multiple players have the same length may return multiple players
      */
     public Player[] getPlayerWithHighestLongestChain() {
-        Player[] winners = new Player[1];
 
-        return winners;
     }
     
     /*
