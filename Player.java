@@ -82,9 +82,25 @@ public class Player {
      * this requires you to loop over the existing tiles to find the correct position,
      * then shift the remaining tiles to the right by one
      */
-    public void addTile(Tile t) {
-
+    public void addTile(Tile t) 
+        {
+        if (numberOfTiles == playerTiles.length) 
+        {
+            return; 
+        }
+        int insertIndex = 0;
+        while (insertIndex < numberOfTiles && playerTiles[insertIndex].compareTo(t) < 0) 
+        {
+            insertIndex++;
+        }
+        for (int i = numberOfTiles - 1; i >= insertIndex; i--) 
+        {
+            playerTiles[i + 1] = playerTiles[i];
+        }
+        playerTiles[insertIndex] = t;
+        numberOfTiles++;
     }
+
 
     /*
      * finds the index for a given tile in this player's hand
