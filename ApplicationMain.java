@@ -79,7 +79,16 @@ public class ApplicationMain {
                     playerChoice = sc.nextInt();
 
                     // TODO: make sure the given index is correct, should be 0 <= index <= 14
-
+                    if (playerChoice >= 0 && playerChoice <= 14) 
+                    {
+                        game.discardTile(playerChoice);
+                        game.passTurnToNextPlayer();
+                    } 
+                    else 
+                    {
+                        System.out.println("Invalid index. Please enter a valid index between 0 and 14.");
+                    }
+                    
                     game.discardTile(playerChoice);
                     game.passTurnToNextPlayer();
                 }
