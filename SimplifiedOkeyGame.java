@@ -150,26 +150,26 @@ public class SimplifiedOkeyGame {
      */
     public void discardTileForComputer() {
         Player currentPlayer = players[currentPlayerIndex];
-        Tile[] tiles = currentPlayer.getTiles();
-    
-        
-        Tile leastUsefulTile = tiles[0];
-        for (int i = 1; i < tiles.length; i++) {
-            if (tiles[i].compareTo(leastUsefulTile) > 0) 
-            {
-                leastUsefulTile = tiles[i];
+        int minChainLength = Integer.MAX_VALUE;
+        int minIndex = -1;
+
+        for (int i = 0; i < currentPlayer.numberOfTiles; i++) {
+            Tile currentTile = currentPlayer.getTiles()[i];
+            currentPlayer.getAndRemoveTile(i);
+
+            int currentChainLength = currentPlayer.findLongestChain();
+            if (currentChainLength < minChainLength) {
+                minChainLength = currentChainLength;
+                minIndex = i;
             }
+
+            currentPlayer.addTile(currentTile);
         }
-      
-        int discardIndex = currentPlayer.findPositionOfTile(leastUsefulTile);
-        if (discardIndex != -1)
-        {
-            discardTile(discardIndex);
-        } 
-        else 
-        {
-            discardTile(0);
-        }
+
+        Tile discardedTile = currentPlayer.getAndRemoveTile(minIndex);
+        lastDiscardedTile = discardedTile;
+
+        System.out.println(currentPlayer.getName() + " discarded tile: " + discardedTile.toString());
     }
     /*
      * TODO: discards the current player's tile at given index
