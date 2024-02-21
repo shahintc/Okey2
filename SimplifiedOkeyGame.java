@@ -33,11 +33,12 @@ public class SimplifiedOkeyGame {
      * other players get 14 tiles, this method assumes the tiles are already shuffled
      */
     public void distributeTilesToPlayers() {
-        players[0].addTile(tiles[0]);
-        for (Player player : players) {
-            for (int i = 0; i < 14; i++) {
-                player.addTile(tiles[i]);
-            }
+       players[0].addTile(tiles[0]);
+        
+        for (int i = 0; i < players.length; i++) {
+            for (int j = 1; i < 15; i++) {
+                player[i].addTile(tiles[i * 14 + j]);
+            }   
         }
     }
 
@@ -62,6 +63,10 @@ public class SimplifiedOkeyGame {
      */
     public String getTopTile() {
         players[currentPlayerIndex].addTile(tiles[0]);
+        Tile [] newTiles = new Tile[tiles.length -1];
+        for (int i = 1; i < tiles.length; i++) {
+            newTiles[i-1] = tiles[i];
+        }
         return tiles[0].toString();
     }
 
