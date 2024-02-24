@@ -36,8 +36,8 @@ public class SimplifiedOkeyGame {
        players[0].addTile(tiles[0]);
         
         for (int i = 0; i < players.length; i++) {
-            for (int j = 1; i < 15; i++) {
-                player[i].addTile(tiles[i * 14 + j]);
+            for (int j = 1; j < 15; j++) {
+                players[i].addTile(tiles[i * 14 + j]);
             }   
         }
     }
@@ -127,7 +127,6 @@ public class SimplifiedOkeyGame {
     }
 
     /*
-     * TODO: pick a tile for the current computer player using one of the following:
      * - picking from the tiles array using getTopTile()
      * - picking from the lastDiscardedTile using getLastDiscardedTile()
      * you should check if getting the discarded tile is useful for the computer
@@ -136,11 +135,11 @@ public class SimplifiedOkeyGame {
     public void pickTileForComputer() {
         if (lastDiscardedTile != null) {
             if (players[currentPlayerIndex].findPositionOfTile(lastDiscardedTile) != -1) {
-                getLastDiscardedTile();
+                System.out.println(getLastDiscardedTile());
             }
         }
         else {
-            getTopTile();
+            System.out.println(getTopTile());
         }
     }
 
